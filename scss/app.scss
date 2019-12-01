@@ -1,6 +1,13 @@
 body {
   font-size: 18px;
 }
+.settings-container {
+  .settings-body {
+    @media (min-width: 576px) {
+      padding-left: 20px;
+    }
+  }
+}
 .a-problem {
   text-align: right;
   float: left;
@@ -9,7 +16,7 @@ body {
   width: 100%;
   @media (min-width: 576px) {
     margin: 20px;
-    width: 150px;
+    width: 145px;
     
   }
   &.correct {

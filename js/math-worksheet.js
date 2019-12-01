@@ -1,12 +1,10 @@
-let pageConfig = {
+let defaultConfig = {
   operation: 'addition',
   totalProblems: 18,
   showAnswers: false,
   minNumber: 0,
   maxNumber: 12
 };
-
-let problemSet = [];
 
 class Problem {
   
@@ -30,13 +28,15 @@ class Problem {
 
 }
 
-const generateProblemSet = () => {
-  problemSet = [];
-  for (let i = 0; i < pageConfig.totalProblems; i++) {
-    problemSet.push(new Problem(pageConfig));
-  }  
+const generateProblemSet = (config) => {
+  let problemSet = [];
+  let finalConfig = Object.assign({}, defaultConfig, config);
+  for (let i = 0; i < finalConfig.totalProblems; i++) {
+    problemSet.push(new Problem(finalConfig));
+  };
+  return problemSet;
 };
 
 generateProblemSet();
 
-export { problemSet };
+export { generateProblemSet };

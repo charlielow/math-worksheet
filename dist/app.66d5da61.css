@@ -2,6 +2,12 @@ body {
   font-size: 18px;
 }
 
+@media (min-width: 576px) {
+  .settings-container .settings-body {
+    padding-left: 20px;
+  }
+}
+
 .a-problem {
   text-align: right;
   float: left;
@@ -12,7 +18,7 @@ body {
 @media (min-width: 576px) {
   .a-problem {
     margin: 20px;
-    width: 150px;
+    width: 145px;
   }
 }
 .a-problem.correct {

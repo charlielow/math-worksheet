@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { problemSet } from './math-worksheet';
+import { generateProblemSet } from './math-worksheet';
 
 class Problem extends React.Component {
   
@@ -48,7 +48,6 @@ class Problem extends React.Component {
 }
 
 
-
 class ProblemSet extends React.Component {
   render() {
     let problemSet = this.props.problemSet;
@@ -59,8 +58,54 @@ class ProblemSet extends React.Component {
   }
 }
 
+class Settings extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalProblems: 18
+    };
+  }  
+
+  render() {
+    return(
+      <div className="container">
+      <div class="row">
+        <div class="col-12">
+          <div className="settings-container">
+            <div className="settings-body">
+              <form>
+                <div className="form-row">
+                  <div className="form-group col-12 col-sm-6 col-lg-3">
+                    <label for="totalProblems">How many problems?</label>
+                    <input type="text" className="form-control" id="totalProblems" value={this.state.totalProblems || ''} onChange={() => {
+                      let tp = Math.min((parseInt(event.target.value, 10) || 0), 384);
+                      this.setState({
+                        totalProblems: tp
+                      })
+                    }} />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ProblemSet problemSet={generateProblemSet({
+            totalProblems: this.state.totalProblems
+          })} />
+        </div>
+      </div>
+    </div>
+    );
+  }
+
+}
+
 const render = () => {
-  ReactDOM.render(<ProblemSet problemSet={problemSet} />, document.getElementById('problem-set'));
+  ReactDOM.render(<Settings />, document.getElementById('settings'));
 };
 
 render();

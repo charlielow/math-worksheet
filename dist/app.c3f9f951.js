@@ -31736,7 +31736,7 @@ if ("development" === 'production') {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.problemSet = void 0;
+exports.generateProblemSet = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31744,15 +31744,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var pageConfig = {
+var defaultConfig = {
   operation: 'addition',
   totalProblems: 18,
   showAnswers: false,
   minNumber: 0,
   maxNumber: 12
 };
-var problemSet = [];
-exports.problemSet = problemSet;
 
 var Problem =
 /*#__PURE__*/
@@ -31783,14 +31781,19 @@ function () {
   return Problem;
 }();
 
-var generateProblemSet = function generateProblemSet() {
-  exports.problemSet = problemSet = [];
+var generateProblemSet = function generateProblemSet(config) {
+  var problemSet = [];
+  var finalConfig = Object.assign({}, defaultConfig, config);
 
-  for (var i = 0; i < pageConfig.totalProblems; i++) {
-    problemSet.push(new Problem(pageConfig));
+  for (var i = 0; i < finalConfig.totalProblems; i++) {
+    problemSet.push(new Problem(finalConfig));
   }
+
+  ;
+  return problemSet;
 };
 
+exports.generateProblemSet = generateProblemSet;
 generateProblemSet();
 },{}],"js/app.js":[function(require,module,exports) {
 "use strict";
@@ -31905,10 +31908,73 @@ function (_React$Component2) {
   return ProblemSet;
 }(_react.default.Component);
 
+var Settings =
+/*#__PURE__*/
+function (_React$Component3) {
+  _inherits(Settings, _React$Component3);
+
+  function Settings(props) {
+    var _this3;
+
+    _classCallCheck(this, Settings);
+
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(Settings).call(this, props));
+    _this3.state = {
+      totalProblems: 18
+    };
+    return _this3;
+  }
+
+  _createClass(Settings, [{
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      return _react.default.createElement("div", {
+        className: "container"
+      }, _react.default.createElement("div", {
+        class: "row"
+      }, _react.default.createElement("div", {
+        class: "col-12"
+      }, _react.default.createElement("div", {
+        className: "settings-container"
+      }, _react.default.createElement("div", {
+        className: "settings-body"
+      }, _react.default.createElement("form", null, _react.default.createElement("div", {
+        className: "form-row"
+      }, _react.default.createElement("div", {
+        className: "form-group col-12 col-sm-6 col-lg-3"
+      }, _react.default.createElement("label", {
+        for: "totalProblems"
+      }, "How many problems?"), _react.default.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "totalProblems",
+        value: this.state.totalProblems || '',
+        onChange: function onChange() {
+          var tp = Math.min(parseInt(event.target.value, 10) || 0, 384);
+
+          _this4.setState({
+            totalProblems: tp
+          });
+        }
+      })))))))), _react.default.createElement("div", {
+        class: "row"
+      }, _react.default.createElement("div", {
+        class: "col-12"
+      }, _react.default.createElement(ProblemSet, {
+        problemSet: (0, _mathWorksheet.generateProblemSet)({
+          totalProblems: this.state.totalProblems
+        })
+      }))));
+    }
+  }]);
+
+  return Settings;
+}(_react.default.Component);
+
 var render = function render() {
-  _reactDom.default.render(_react.default.createElement(ProblemSet, {
-    problemSet: _mathWorksheet.problemSet
-  }), document.getElementById('problem-set'));
+  _reactDom.default.render(_react.default.createElement(Settings, null), document.getElementById('settings'));
 };
 
 render();
@@ -31940,7 +32006,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61560" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49938" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
