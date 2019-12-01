@@ -3,11 +3,17 @@ body {
 }
 
 .a-problem {
-  margin: 20px;
-  padding: 20px 20px 30px 20px;
-  width: 150px;
   text-align: right;
   float: left;
+  margin: 0px 0px 20px;
+  padding: 20px 20px 30px 20px;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .a-problem {
+    margin: 20px;
+    width: 150px;
+  }
 }
 .a-problem.correct {
   background-color: #d4edda;
@@ -29,6 +35,7 @@ body {
 .seperator hr {
   position: relative;
   top: -4px;
+  border-top-color: #666;
 }
 
 .answer-input {

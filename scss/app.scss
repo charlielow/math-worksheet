@@ -2,11 +2,16 @@ body {
   font-size: 18px;
 }
 .a-problem {
-  margin: 20px;
-  padding: 20px 20px 30px 20px;
-  width: 150px;
   text-align: right;
   float: left;
+  margin: 0px 0px 20px;
+  padding: 20px 20px 30px 20px;
+  width: 100%;
+  @media (min-width: 576px) {
+    margin: 20px;
+    width: 150px;
+    
+  }
   &.correct {
     background-color: #d4edda;
     border-color: #c3e6cb;
@@ -25,6 +30,7 @@ body {
 .seperator hr {
   position: relative;
   top: -4px;
+  border-top-color: #666;
 }
 .answer-input {
   width: 100%;
